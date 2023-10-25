@@ -1,4 +1,20 @@
 import random
+import shelve
+
+# Open the file containing the high scores
+with shelve.open('scores') as db:
+    # Retrieve the high scores from the database
+    scores = db.get('scores', [])
+
+    # Add the new score to the list of high scores
+    scores.append(scores)
+
+    
+    # Limit the high scoreboard list to 10 entries
+    scores = scores[:10]
+
+    # Save the updated list of high scores to the database
+    db['scores'] = scores
 
 def play_game():
     name = input("Enter your name: ")
@@ -31,14 +47,17 @@ def view_scores(scores):
 def main():
     scores = []
     while True:
+        # User A is greeted with a menu, asking to choose an action
         print("Welcome to the python guessing game, please select an option")
         print("(a) Play\n")
         print("(b) View High Scores\n")
         print("(c) Exit\n")
+        
         choice = input("Enter your choice: ")
         if choice == "a":
             score = play_game()
-            scores.append(score)
+            
+            scores.append(score)  
         elif choice == "b":
             view_scores(scores[-10:])
         elif choice == "c":
@@ -51,3 +70,7 @@ if __name__ == "__main__":
     main()
 
 # Optional goals not implemented............
+
+
+
+
