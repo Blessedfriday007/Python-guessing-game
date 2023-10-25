@@ -40,7 +40,7 @@ def save_score(name, tries):
     scores.append({"name": name, "tries": tries})
     scores.sort(key=lambda x: x["tries"])
     with open("scores.json", "w") as f:
-        json.dump(scores[:10], f)
+        json.dump(scores[:10],  f)
 
 def main():
     while True:
