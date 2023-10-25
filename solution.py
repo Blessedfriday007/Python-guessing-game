@@ -13,7 +13,7 @@ def play_game():
         if guess < number:
             print("Your guess is too low.")
         elif guess > number:
-            print("Your guess is too high.")
+            print("Your guess is too high ")
         else:
             print("Congratulations! You guessed the number in " + str(tries) + " tries.")
             return name, tries
