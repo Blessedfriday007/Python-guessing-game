@@ -5,7 +5,7 @@ def play_game():
     name = input("Enter your name: ")
     print(f"Welcome {name}! Let's play the python guessing game.")
     print("I am thinking of a number between 0 and 30. You have 10 tries to guess it right.")
-    # Random variable generator
+    # Random variable generator.
     number = random.randint(0, 30)
     tries = 10
     while tries > 0:
@@ -39,6 +39,7 @@ def save_score(name, tries):
         with open("scores.json", "r") as f:
             scores = json.load(f)
     except FileNotFoundError:
+        # User information along with the number of tries saved in a list.
         scores = []
     scores.append({"name": name, "tries": tries})
     scores.sort(key=lambda x: x["tries"])
@@ -47,6 +48,7 @@ def save_score(name, tries):
 
 def main():
     while True:
+        # User A starts the python guessing game program, and is greeted with a menu, asking to choose an action
         print("Welcome to the python guessing game, please select an option")
         print("(a) Play\n")
         print("(b) Score\n")
