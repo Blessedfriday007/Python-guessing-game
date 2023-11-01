@@ -1,4 +1,20 @@
 import random
+import shelve
+
+# Open the file containing the high scores
+with shelve.open('scores') as db:
+    # Retrieve the high scores from the database
+    scores = db.get('scores', [])
+
+    # Add the new score to the list of high scores
+    scores.append(scores)
+
+    
+    # Limit the high scoreboard list to 10 entries
+    scores = scores[:10]
+
+    # Save the updated list of high scores to the database
+    db['scores'] = scores
 
 def play_game():
     name = input("Enter your name: ")
@@ -21,7 +37,7 @@ def play_game():
     return name, -1
 
 def view_scores(scores):
-    print("High Scores:\n") 
+    print("High Scores:") 
     for score in scores:
         if score[1] == -1:
             print(score[0] + ": Failed")
