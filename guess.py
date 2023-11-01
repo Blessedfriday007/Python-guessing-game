@@ -69,7 +69,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Optional goals not perfectly implemented .....
+# Optional goals not perfectly implemented ......
 
 
 
