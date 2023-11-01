@@ -64,7 +64,7 @@ def main():
             print("Thank you for playing Goodbye!...")
             break
         else:
-            print("Invalid choice. Pleas select a, b, or c.")
+            print("Invalid choice. Please select a, b, or c.")
 
 if __name__ == "__main__":
     main()
