@@ -1,76 +1,65 @@
 import random
-import shelve
-
-# Open the file containing the high scores
-with shelve.open('scores') as db:
-    # Retrieve the high scores from the database
-    scores = db.get('scores', [])
-
-    # Add the new score to the list of high scores
-    scores.append(scores)
-
-    
-    # Limit the high scoreboard list to 10 entries
-    scores = scores[:10]
-
-    # Save the updated list of high scores to the database
-    db['scores'] = scores
+import json
 
 def play_game():
     name = input("Enter your name: ")
-    print("Hello, " + name + "! Welcome to the python guessing game.")
+    print(f"Welcome {name}! Let's play the python guessing game.")
     print("I am thinking of a number between 0 and 30. You have 10 tries to guess it right.")
-    # random variable generator
     number = random.randint(0, 30)
-    tries = 0
-    while tries < 10:
-        guess = int(input("Guess the number: "))
-        tries += 1
-        if guess < number:
-            print("Your guess is too low.")
-        elif guess > number:
-            print("Your guess is too high ")
+    tries = 10
+    while tries > 0:
+        guess = int(input("Guess a number between 0 and 30: "))
+        
+        if guess == number:
+            print(f"Congratulations {name}! You guessed the number in {11 - tries} tries.")
+            save_score(name, 11 - tries)
+            break
         else:
-            print("Congratulations! You guessed the number in " + str(tries) + " tries.")
-            return name, tries
-    print("Sorry, you ran out of tries. The number was " + str(number) + ".")
-    return name, -1
+            tries -= 1
+            if tries == 0:
+                print(f"Sorry {name}, you have used up all your tries. The number was {number}.")
+                break
+            else:
+                print(f"Wrong guess. You have {tries} tries left.")
 
-def view_scores(scores):
-    print("High Scores:") 
-    for score in scores:
-        if score[1] == -1:
-            print(score[0] + ": Failed")
-        else:
-            print(score[0] + ": " + str(score[1]) + " tries")
+def view_scores():
+    try:
+        with open("scores.json", "r") as f:
+            scores = json.load(f)
+        scores.sort(key=lambda x: x["tries"])
+        print("High Scores:")
+        for i, score in enumerate(scores[:10]):
+            print(f"{i+1}. {score['name']} - {score['tries']} tries")
+    except FileNotFoundError:
+        print("No scores found.")
+
+def save_score(name, tries):
+    try:
+        with open("scores.json", "r") as f:
+            scores = json.load(f)
+    except FileNotFoundError:
+        scores = []
+    scores.append({"name": name, "tries": tries})
+    scores.sort(key=lambda x: x["tries"])
+    with open("scores.json", "w") as f:
+        json.dump(scores[:10],  f)
 
 def main():
-    scores = []
     while True:
-        # User A is greeted with a menu, asking to choose an action
         print("Welcome to the python guessing game, please select an option")
         print("(a) Play\n")
-        print("(b) View High Scores\n")
+        print("(b) Score\n")
         print("(c) Exit\n")
-        
         choice = input("Enter your choice: ")
         if choice == "a":
-            score = play_game()
-            
-            scores.append(score)  
+            play_game()
         elif choice == "b":
-            view_scores(scores[-10:])
+            view_scores()
         elif choice == "c":
-            print("Thank you for playing Goodbye!...")
+            print("Thank you for playing Goodbye!")
             break
         else:
             print("Invalid choice. Please select a, b, or c.")
 
 if __name__ == "__main__":
     main()
-
-# Optional goals not perfectly implemented ......
-
-
-
-
