@@ -37,7 +37,7 @@ def play_game():
     return name, -1
 
 def view_scores(scores):
-    print("High Scores:")
+    print("High Scores:") 
     for score in scores:
         if score[1] == -1:
             print(score[0] + ": Failed")
