@@ -51,7 +51,7 @@ def save_score(name, tries):
 def main():
     while True:
         # User A starts the python guessing game program, and is greeted with a menu, asking to choose an action
-        print("Welcome to the python guessing game, please select an option")
+        print("Welcome to the python guessing game, please select an option\n")
         print("(a) Play\n")
         print("(b) Score\n")
         print("(c) Exit\n")
