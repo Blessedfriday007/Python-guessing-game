@@ -34,4 +34,4 @@ Just as the name sounds, its a guessing game, built on python, where the  progra
 - If user A selects the option (c), print a goodbye message, and proceed to exit the program.
 -----------------------------------------------------------------------------------------------------------------------
 
-**Note:** Program must not exit, except forecfully closed or user exits following the exit process. In order words, this is a continous running program
+**Note:** Program must not exit, except forecfully closed or user exits following the exit process. In order words, this is a continous running program.
